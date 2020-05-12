@@ -1,0 +1,34 @@
+{
+  "movies": [
+    {
+      "title": "A Walk To Remember",
+      "actors": "Mandy Moore | Shane West",
+      "year": "2002",
+      "rating": "7.4 / 10"
+    },
+    {
+      "title": "Final Destination 3",
+      "actors": "Ryan Merriman",
+      "year": "2006",
+      "rating": "5.8 / 10"
+    },
+    {
+      "title": "Mission Impossible",
+      "actors": "Tom Cruise | Emmanuelle Beart",
+      "year": "1996",
+      "rating": "7.1 / 10"
+    },
+    {
+      "title": "Wonder Woman",
+      "actors": "Gal Gadot | Chris Pine",
+      "year": "2017",
+      "rating": "7.4 / 10"
+    },
+    {
+      "title": "Avengers: Endgame",
+      "actors": "Robert Downey, Jr. | Scarlett Johansson | Chris Evans",
+      "year": "2019",
+      "rating": "8.5 / 10"
+    }
+  ]
+}

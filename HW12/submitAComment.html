@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Submit a Comment</title>
+    <style>
+      h2 {
+        font-size: 26px;
+        font-weight: 600;
+        color: #b20000;
+        margin-bottom: 30px;
+      }
+      .name,
+      .comment {
+        border-radius: 5px;
+        width: 700px;
+        font-size: 18px;
+        margin-bottom: 20px;
+        padding: 10px;
+      }
+      .submitButton {
+        display: block;
+        width: 100px;
+        text-align: center;
+        border-radius: 5px;
+        height: 35px;
+        font-weight: 600;
+        background-color: #b20000;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 class="heading">Your feedback is appreciated!</h2>
+    <form action="./processComment.php" method="POST">
+      <!-- Input for user's name -->
+      <input
+        class="name"
+        type="text"
+        id="name"
+        name="name"
+        placeholder="Name"
+        required
+      /><br />
+      <!-- Input for user's comment -->
+      <textarea
+        class="comment"
+        type="text"
+        id="comment"
+        name="comment"
+        placeholder="Comment"
+        required
+      ></textarea>
+      <!-- Submit button -->
+      <input class="submitButton" type="submit" value="SUBMIT" />
+    </form>
+  </body>
+</html>

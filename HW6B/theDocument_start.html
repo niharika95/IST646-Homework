@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Demo</title>
+  </head>
+  <style>
+    #best {
+      position: absolute;
+      left: 500px;
+      top: 10px;
+    }
+    button {
+      margin-left: 10px;
+    }
+  </style>
+
+  <script>
+    function number01() {
+      //change the text of the <title> tag to say "PowerPoint Demo"
+    }
+    function number02() {
+      //change the second <p> tag so the font is red
+      var paragraphs = document.getElementsByTagName('p')
+      console.log(paragraphs.length)
+      paragraphs[1].style.color = 'red'
+    }
+    function number03() {
+      //If "3. Yahoo" is displayed, make it disappear
+      if (
+        document.getElementById('myList').getElementsByTagName('li')[2].style
+          .display == 'none'
+      ) {
+        document
+          .getElementById('myList')
+          .getElementsByTagName('li')[2].style.display = ''
+      } else {
+        //else, make it appear!
+        document
+          .getElementById('myList')
+          .getElementsByTagName('li')[2].style.display = 'none'
+      }
+    }
+    function number04() {
+      //make all with the className of 'new' have a yellow background
+
+      var hold = document.getElementsByClassName('new')
+      for (var i = 0; i < hold.length; i++) {
+        hold[i].style.backgroundColor = 'yellow'
+      }
+
+      /* alternarte method with querySelector
+       var hold = document.querySelectorAll(".new");
+        for(var i = 0;i<hold.length;i++){
+            hold[i].style.backgroundColor = "yellow";
+
+        }
+        */
+    }
+    function number05() {
+      //each time it is clicked, make the image (id of 'best') move right by 10 pixels
+      var hold = document.getElementById('best')
+      //alert(hold.style.left);
+      var left = parseInt(hold.style.left)
+      //alert(left);
+      hold.style.left = left + 10 + 'px'
+    }
+    function number06() {
+      //append, at the end of the document, the text " ISTE 240 "
+      var myNode = document.createTextNode(' ISTE 240 ')
+
+      document.getElementsByTagName('body')[0].appendChild(myNode)
+    }
+    function number07() {
+      //create an <li> node
+      let liNode = document.createElement('li')
+
+      //create an <a> node
+      let aNode = document.createElement('a')
+
+      //create a text node holding "Purdue University"
+      let textNode = document.createTextNode('Purdue University')
+
+      //put the text node inside of the <a> tag
+      aNode.appendChild(textNode)
+
+      //give the <a> tag the href attribute and set it to "https://www.purdue.edu/"
+      aNode['href'] = 'https://www.purdue.edu/'
+
+      //put the <a> tag inside of the <li>
+      liNode.appendChild(aNode)
+
+      //put the <li> in the <ol> so it shows up first!
+      let ol = document.querySelector('ol')
+      let refNode = document.querySelector('ol').querySelector('li')
+      ol.insertBefore(liNode, refNode)
+    }
+  </script>
+  <body>
+    <h1>DOM demo</h1>
+    <img src="ritLogo.png" id="best" style="position:absolute;left:500px;" />
+    <p class="new">This is a demonstration.</p>
+    <ul>
+      <li>Document is the html page</li>
+      <li>Object refers to things on the page</li>
+      <li>Model refers to standardization</li>
+    </ul>
+    <p id="test">This is short but it is the second paragraph</p>
+    <p class="new">This is the third paragraph</p>
+    <ol id="myList">
+      <li><a href="http://www.rit.edu">RIT</a></li>
+      <li><a href="http://www.google.com">Google</a></li>
+      <li><a href="http://www.yahoo.com">Yahoo</a></li>
+      <li><a href="http://www.brockport.edu">Brockport</a></li>
+    </ol>
+    <p>
+      <button type="button" onclick="number01()" ;>01</button>
+      <button type="button" onclick="number02();">02</button>
+      <button type="button" onclick="number03();">03</button>
+      <button type="button" onclick="number04();">04</button>
+      <button type="button" onclick="number05();">05</button>
+      <button type="button" onclick="number06();">06</button>
+      <button type="button" onclick="number07();">07</button>
+    </p>
+  </body>
+</html>

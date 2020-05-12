@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>XHR JSON Example</title>
+    <style>
+      * {
+        font-family: tahoma, verdana, sans-serif;
+      }
+
+      .joke {
+        border: 1px solid black;
+        padding: 5px;
+        margin-bottom: 10px;
+      }
+    </style>
+    <script>
+      ;(function() {
+        'use strict'
+        window.onload = init
+
+        function init() {
+          document.querySelector('#mybutton').onclick = loadData
+        }
+
+        function loadData() {
+          var xhr = new XMLHttpRequest()
+          xhr.onload = function() {
+            // JSON.parse() converts a string to JSON.
+            var myJSON = JSON.parse(xhr.responseText)
+            let html = ''
+            //	var myJSON = eval('(' + xhr.responseText + ')');
+            var allJokes = myJSON.jokes
+
+            for (let joke in allJokes) {
+              html += '<h4>' + allJokes[joke].q + '</h4>'
+              html += '<h5><em>' + allJokes[joke].a + '</em></h5>'
+              html += '<h5>Rating = ' + allJokes[joke].rating + '</h5><hr>'
+            }
+            document.querySelector('#content').innerHTML =
+              '<h3>Here are the jokes!</h3><hr><br>' + html
+          }
+
+          var url = 'jokes.json'
+          xhr.open('GET', url, true)
+          // try to prevent browser caching by sending a header to the server
+          xhr.setRequestHeader(
+            'If-Modified-Since',
+            'Sat, 1 Jan 2010 00:00:00 GMT'
+          )
+          xhr.send()
+        }
+      })()
+    </script>
+  </head>
+  <body>
+    <h1>Jokes!</h1>
+    <p><button id="mybutton">Fetch Data</button></p>
+    <div id="content"></div>
+  </body>
+</html>

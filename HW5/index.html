@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Event Finder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <style>
+      li {
+        margin-bottom: 1em;
+      }
+      pre {
+        background-color: #ddd;
+        padding: 1em;
+      }
+      * {
+        font-family: helvetica;
+      }
+      h1,
+      h2 {
+        font-family: sans-serif;
+      }
+      code,
+      pre {
+        font-family: monospace;
+      }
+    </style> -->
+    <!-- Import jQuery -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <script>
+      var EVENTFUL_JSONP_URL = 'https://api.eventful.com/json/events/search?'
+      var EVENTFUL_API_KEY = '4Qh29FqLQShZnvxs'
+
+      window.onload = init
+
+      function init() {
+        document.querySelector('#search').onclick = getData
+      }
+
+      // MY FUNCTIONS
+      function getData() {
+        // build up our URL string
+        var url = EVENTFUL_JSONP_URL
+        url += 'callback=jsonLoaded'
+        url += '&app_key=' + EVENTFUL_API_KEY
+        url += '&location='
+
+        // get value of form field
+        var value = document.querySelector('#searchterm').value
+
+        // get rid of any leading and trailing spaces
+        value = value.trim()
+
+        // if there's no band to search then bail out of the function (return does this)
+        if (value.length < 1) return
+
+        document.querySelector('#content').innerHTML =
+          '<b>Searching for ' + value + '</b>'
+
+        // replace spaces the user typed in the middle of the term with %20
+        // %20 is the hexadecimal value for a space
+        value = encodeURI(value)
+
+        // finally, add the artist name to the end of the string
+        url += value
+
+        // call the web service, and download the file
+        console.log('loading ' + url)
+        $('#content').fadeOut(250)
+
+        //
+        var script = document.createElement('script')
+        script.setAttribute('src', url)
+        script.setAttribute('id', 'lastFMFetch')
+        document.querySelector('head').appendChild(script)
+      }
+
+      function jsonLoaded(obj) {
+        console.log('obj = ' + obj)
+        console.log('obj stringified = ' + JSON.stringify(obj))
+
+        // get rid of script tag
+        var scriptTag = document.querySelector('#lastFMFetch')
+        document.querySelector('head').removeChild(scriptTag)
+
+        if (obj.error) {
+          document.querySelector('#content').innerHTML =
+            '<b>Error</b>' + obj.description
+          console.log('error: ' + obj.description)
+        } else {
+          var allEvents = obj.events.event
+          console.log('allEvents.length = ' + allEvents.length)
+          var bigString = ''
+
+          for (var i = 0; i < allEvents.length; i++) {
+            var event = allEvents[i]
+            var description = event.description
+              ? event.description
+              : 'No description found.'
+            var title = event.title ? event.title : 'No title found.'
+            var start_time = event.start_time
+              ? event.start_time
+              : 'No start time found.'
+
+            var line = '<p>'
+            line += '<h3>' + title + '</h3>'
+            line += '<em>' + description + '</em>'
+            line += '<br><b>Start Time: ' + start_time + '</b>'
+            line += '</p>'
+            line += '<hr />'
+            bigString += line
+          }
+          document.querySelector('#content').innerHTML = bigString
+
+          $('#content').fadeIn(1000)
+        }
+      }
+    </script> -->
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <div class="header">
+      <div class="logo">
+        <img src="./assets/logo.png" alt="logo" class="image" />
+      </div>
+      <div class="menu"><img src="./assets/menu.png" class="menuIcon" /></div>
+      <div class="navigation">
+        <a class="link" href="#">Home</a>
+        <a class="link" href="#">Activities</a>
+        <a class="link" href="#">Food</a>
+        <a class="link" href="#">Rest</a>
+        <a class="link" href="#">People</a>
+        <a class="link" href="#">Facebook</a>
+      </div>
+    </div>
+    <h1>Please tell us about your visit</h1>
+    <div class="box">
+      <div class="content">
+        <div class="errorMessageContainer"></div>
+        <form
+          method="POST"
+          action="process.php"
+          onsubmit="return validateForm()"
+        >
+          <div class="formItem">
+            <h3>Enter your name:<span>*</span></h3>
+            <input class="name" name="name" />
+          </div>
+
+          <div class="formItem">
+            <h3>
+              Enter the number of people in your group:
+            </h3>
+            <input class="number" name="number" />
+          </div>
+
+          <div class="formItem">
+            <h3>Enter the date you visited:<span>*</span></h3>
+            <input type="date" class="date" name="date" value="" />
+          </div>
+
+          <h3 class="place">Select your favourite place:<span>*</span></h3>
+          <div class="radioButtons">
+            <div class="formItem">
+              <input
+                type="radio"
+                id="baseballField"
+                name="place"
+                value="Baseball Field"
+              />
+              <label for="baseballField">Baseball Field</label>
+            </div>
+            <div class="formItem">
+              <input type="radio" id="museum" name="place" value="Museum" />
+              <label for="museum">Museum</label>
+            </div>
+
+            <div class="formItem">
+              <input
+                type="radio"
+                id="luigisItalianRestaurant"
+                name="place"
+                value="Luigi's Italian Restaurant"
+              />
+              <label for="luigisItalianRestaurant"
+                >Luigi's Italian Restaurant</label
+              >
+            </div>
+            <div class="formItem">
+              <input
+                type="radio"
+                id="momsHotel"
+                name="place"
+                value="Mom's Hotel"
+              />
+              <label for="momsHotel">Mom's Hotel</label>
+            </div>
+
+            <div class="formItem">
+              <input
+                type="radio"
+                id="theYouthHostel"
+                name="place"
+                value="The Youth Hostel"
+              />
+              <label for="theYouthHostel">The Youth Hostel</label>
+            </div>
+            <div class="formItem">
+              <input type="radio" id="other" name="place" value="Other" />
+              <label for="other">Other</label>
+            </div>
+          </div>
+          <h3>Please rate Plymouth, MI:</h3>
+          <div class="slideContainer">
+            <input
+              type="range"
+              min="1"
+              max="10"
+              value="5"
+              class="slider"
+              id="myRange"
+              name="slider"
+            />
+            <span id="value"></span>
+          </div>
+          <input type="submit" value="SUBMIT" />
+        </form>
+      </div>
+    </div>
+    <script src="javascript.js"></script>
+  </body>
+</html>

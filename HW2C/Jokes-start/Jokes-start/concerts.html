@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>XHR XML Example</title>
+    <style>
+      * {
+        font-family: tahoma, verdana, sans-serif;
+      }
+    </style>
+    <script>
+      'use strict'
+      ;(function() {
+        window.onload = init
+
+        function init() {
+          document.querySelector('#mybutton').onclick = loadData
+        }
+
+        function loadData() {
+          var xhr = new XMLHttpRequest()
+          xhr.onload = function() {
+            let html = '<h2>Here are the old concerts!</h2>'
+            var xml = xhr.responseXML
+            let allEvents = xml.querySelectorAll('event')
+            for (let i = 0; i < allEvents.length; i++) {
+              let event = allEvents[i]
+              let title = event.querySelector('title').textContent
+              let city = event.querySelector('city').textContent
+              let startDate = event.querySelector('startDate').textContent
+              let images = event.querySelectorAll('image')
+              let image
+              for (let i = 0; i < images.length; i++) {
+                if (images[i].getAttribute('size') === 'extralarge') {
+                  image = images[i]
+                }
+              }
+              let imageSrc = image.textContent
+              html += "<hr><div class='event'>"
+              html += '<h3>' + title + '</h3>'
+              html += '<p>' + city + ' - ' + startDate + '<p/>'
+              html += '<img src="' + imageSrc + '" />'
+              html += '</div><hr>'
+            }
+
+            document.querySelector('#content').innerHTML = html
+          }
+
+          var url = 'last-fm-results.xml'
+          xhr.open('GET', url, true)
+          // try to prevent browser caching by sending a header to the server
+          xhr.setRequestHeader(
+            'If-Modified-Since',
+            'Sat, 1 Jan 2010 00:00:00 GMT'
+          )
+          xhr.send()
+        }
+      })()
+    </script>
+  </head>
+  <body>
+    <h1>Concerts!</h1>
+    <p><button id="mybutton">Let's see some old concerts times</button></p>
+    <div id="content"></div>
+  </body>
+</html>

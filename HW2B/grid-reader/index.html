@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>XHR CSV Example</title>
+    <style>
+      body {
+        width: 340px;
+        margin-left: 20px;
+      }
+      select {
+        display: block;
+        margin: 30px 0px 50px 0px;
+        padding: 5px 5px;
+        border: 2px solid blue;
+        border-radius: 5px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      canvas {
+        border: 1px solid black;
+        background: lightgray;
+      }
+    </style>
+    <script>
+      ;(function() {
+        window.onload = init
+
+        function init() {
+          let selected = document.querySelector('#selectGroup')
+          selected.addEventListener('change', function() {
+            if (this.value === 'happyMac') {
+              loadData('happy-mac.txt')
+            } else if (this.value === 'watch') {
+              loadData('watch.txt')
+            } else {
+              loadData('flower.txt')
+            }
+          })
+        }
+
+        function loadData(url) {
+          var xhr = new XMLHttpRequest()
+
+          xhr.onload = function() {
+            var response = xhr.responseText
+            var gridArray = response.split('\n')
+            for (var i = 0; i < gridArray.length; i++) {
+              var line = gridArray[i]
+              gridArray[i] = line.split(',')
+            }
+
+            drawGrid(gridArray)
+          }
+
+          xhr.open('GET', url, true)
+          // try to prevent browser caching by sending a header to the server
+          xhr.setRequestHeader(
+            'If-Modified-Since',
+            'Sat, 1 Jan 2010 00:00:00 GMT'
+          )
+          xhr.send()
+        }
+
+        function drawGrid(grid) {
+          var canvas = document.querySelector('canvas')
+          var ctx = canvas.getContext('2d')
+          var cellWidth = canvas.width / grid.length
+          var COLORS = [
+            'rgba(0,0,0,0)', //0
+            'white', //1
+            'black', //2
+            'red', //3
+            'green', //4
+            'blue', //5
+            'yellow', //6
+            'magenta', //7
+            '#D3D3D3' //light grey
+          ]
+          var halfWidth = cellWidth / 2.0
+          for (var i = 0; i < grid.length; i++) {
+            for (var j = 0; j < grid[i].length; j++) {
+              var value = grid[i][j]
+              ctx.fillStyle = COLORS[8]
+              ctx.fillRect(j * cellWidth, i * cellWidth, cellWidth, cellWidth)
+            }
+          }
+          for (var i = 0; i < grid.length; i++) {
+            for (var j = 0; j < grid[i].length; j++) {
+              var value = grid[i][j]
+              ctx.fillStyle = COLORS[value]
+
+              ctx.fillRect(j * cellWidth, i * cellWidth, cellWidth, cellWidth)
+            }
+          }
+        }
+      })()
+    </script>
+  </head>
+  <body>
+    <select id="selectGroup">
+      <option disabled selected>Select an option</option>
+      <option value="happyMac">Happy Mac</option>
+      <option value="watch">Watch</option>
+      <option value="flower">Flower</option>
+    </select>
+    <canvas width="320" height="320">Get a real browser!</canvas>
+  </body>
+</html>

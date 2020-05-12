@@ -1,0 +1,27 @@
+<movies>
+  <movie year="2002">
+    <title>A Walk To Remember</title>
+    <rating>7.4 / 10</rating>
+    <actors>Mandy Moore | Shane West</actors>
+  </movie>
+  <movie year="2006">
+    <title>Final Destination 3</title>
+    <rating>5.8 / 10</rating>
+    <actors>Ryan Merriman</actors>
+  </movie>
+  <movie year="1996">
+    <title>Mission Impossible</title>
+    <rating>7.1 / 10</rating>
+    <actors>Tom Cruise | Emmanuelle Beart</actors>
+  </movie>
+  <movie year="2017">
+    <title>Wonder Woman</title>
+    <rating>7.4 / 10</rating>
+    <actors>Gal Gadot | Chris Pine</actors>
+  </movie>
+  <movie year="2019">
+    <title>Avengers: Endgame</title>
+    <rating>8.5 / 10</rating>
+    <actors>Robert Downey, Jr. | Scarlett Johansson | Chris Evans</actors>
+  </movie>
+</movies>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>XHR XML Example</title>
+    <style>
+      * {
+        font-family: tahoma, verdana, sans-serif;
+      }
+    </style>
+    <script>
+      'use strict'
+      ;(function() {
+        window.onload = init
+
+        function init() {
+          document.querySelector('#mybutton').onclick = loadData
+        }
+
+        function loadData() {
+          var xhr = new XMLHttpRequest()
+          var allJokes = []
+          xhr.onload = function() {
+            let html = "<h2>Here's a few picks for you!</h2>"
+            var xml = xhr.responseXML
+            let allMovies = xml.querySelectorAll('movie')
+            for (let i = 0; i < allMovies.length; i++) {
+              let movie = allMovies[i]
+              let title = movie.querySelector('title').textContent
+              let rating = movie.querySelector('rating').textContent
+              let actors = movie.querySelector('actors').textContent
+              let year = movie.getAttribute('year')
+              html += "<hr><div class='movie'>"
+              html +=
+                '<h2 style="display:inline">' +
+                title +
+                '</h2> <h4 style="display:inline">(' +
+                year +
+                ')</h4>'
+              html += '<p>' + actors + '<p/>'
+              html += '<p><em>' + rating + '</em><p/>'
+              html += '</div><hr>'
+            }
+
+            document.querySelector('#content').innerHTML = html
+          }
+
+          var url = 'movies.xml'
+          xhr.open('GET', url, true)
+          // try to prevent browser caching by sending a header to the server
+          xhr.setRequestHeader(
+            'If-Modified-Since',
+            'Sat, 1 Jan 2010 00:00:00 GMT'
+          )
+          xhr.send()
+        }
+      })()
+    </script>
+  </head>
+  <body>
+    <h1>Movies!</h1>
+    <p><button id="mybutton">Get movies</button></p>
+    <div id="content"></div>
+  </body>
+</html>
